@@ -118,6 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tumb1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\transparent.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="background_resized" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Webp.net-resizeimage (1).jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -208,71 +211,4 @@
   <data name="image_play" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image_play.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="add_user_bg_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\add_user-bg-1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="avatar1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\avatar1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="avatar10" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\avatar10.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="avatar11" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\avatar11.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="avatar12" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\avatar12.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="avatar2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\avatar2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="avatar3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\avatar3.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="avatar4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\avatar4.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="avatar5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\avatar5.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="avatar6" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\avatar6.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="avatar7" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\avatar7.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="avatar8" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\avatar8.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="avatar9" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\avatar9.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="change_user_bg" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\change-user-bg.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="choosing_bg" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Webp.net-resizeimage (2).jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="default_avatar" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\default-avatar.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="feel_it_still" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\feel-it-still.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="noname" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\515673362.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pop_sound" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pop_sound.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="salfetki_info" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\salfetki-info.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="turbo_pizza" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\turbo-pizza.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="you_dont_know_me" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\you-dont-know-me.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  
 </root>

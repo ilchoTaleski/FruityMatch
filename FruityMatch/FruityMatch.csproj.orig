@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="AddNewUser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,6 +72,10 @@
     </Compile>
     <Compile Include="Fruit Collections\AppleCollection.cs" />
     <Compile Include="Player\AutomaticGame.cs" />
+=======
+    <Compile Include="AppleCollection.cs" />
+    <Compile Include="AutomaticGame.cs" />
+>>>>>>> 18b6ef9b2e5c385012bdbdbd10e9f3bf0173ccf7
     <Compile Include="ChoosingCombinations.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +83,7 @@
       <DependentUpon>ChoosingCombinations.cs</DependentUpon>
     </Compile>
     <Compile Include="Game.cs" />
+<<<<<<< HEAD
     <Compile Include="Fruit Collections\LemonCollection.cs" />
     <Compile Include="Napkins and Plates\LittlePlate.cs" />
     <Compile Include="Napkins and Plates\LittlePlates.cs" />
@@ -88,12 +94,25 @@
     <Compile Include="Fruits\Apple.cs" />
     <Compile Include="Player\FruitsDocument.cs" />
     <Compile Include="Fruit Collections\WatermelonCollection.cs" />
+=======
+    <Compile Include="LemonCollection.cs" />
+    <Compile Include="LittlePlate.cs" />
+    <Compile Include="LittlePlates.cs" />
+    <Compile Include="PeachCollection.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="PlumCollection.cs" />
+    <Compile Include="Watermelon.cs" />
+    <Compile Include="Apple.cs" />
+    <Compile Include="FruitsDocument.cs" />
+    <Compile Include="WatermelonCollection.cs" />
+>>>>>>> 18b6ef9b2e5c385012bdbdbd10e9f3bf0173ccf7
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Fruits\Fruit.cs" />
     <Compile Include="Fruit Collections\FruitCollection.cs" />
     <Compile Include="Fruits\Lemon.cs" />
@@ -130,6 +149,19 @@
     <EmbeddedResource Include="ChoosePlayingStyle.resx">
       <DependentUpon>ChoosePlayingStyle.cs</DependentUpon>
     </EmbeddedResource>
+=======
+    <Compile Include="Fruit.cs" />
+    <Compile Include="FruitCollection.cs" />
+    <Compile Include="Lemon.cs" />
+    <Compile Include="Napkin.cs" />
+    <Compile Include="NapkinCollection.cs" />
+    <Compile Include="Orange.cs" />
+    <Compile Include="OrangeCollection.cs" />
+    <Compile Include="Peach.cs" />
+    <Compile Include="Plum.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+>>>>>>> 18b6ef9b2e5c385012bdbdbd10e9f3bf0173ccf7
     <EmbeddedResource Include="ChoosingCombinations.resx">
       <DependentUpon>ChoosingCombinations.cs</DependentUpon>
     </EmbeddedResource>
@@ -138,12 +170,23 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+<<<<<<< HEAD
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="RevealingCombinations.resx">
       <DependentUpon>RevealingCombinations.cs</DependentUpon>
     </EmbeddedResource>
+=======
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+>>>>>>> 18b6ef9b2e5c385012bdbdbd10e9f3bf0173ccf7
     <None Include="Properties\DataSources\Form1.datasource" />
     <None Include="Properties\DataSources\FruityMatch.Properties.Resources.datasource" />
     <None Include="Properties\DataSources\FruityMatch.Properties.Settings.datasource" />
@@ -345,6 +388,7 @@
   <ItemGroup>
     <None Include="Resources\image_play.jpg" />
   </ItemGroup>
+<<<<<<< HEAD
   <ItemGroup>
     <None Include="Resources\515673362.jpg" />
   </ItemGroup>
@@ -414,5 +458,7 @@
   <ItemGroup>
     <None Include="Resources\pop_sound.wav" />
   </ItemGroup>
+=======
+>>>>>>> 18b6ef9b2e5c385012bdbdbd10e9f3bf0173ccf7
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

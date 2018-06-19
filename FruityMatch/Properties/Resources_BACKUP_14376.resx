@@ -118,6 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+<<<<<<< HEAD
+=======
+  <data name="tumb1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\transparent.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+>>>>>>> 18b6ef9b2e5c385012bdbdbd10e9f3bf0173ccf7
   <data name="background_resized" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Webp.net-resizeimage (1).jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -208,6 +214,7 @@
   <data name="image_play" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image_play.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+<<<<<<< HEAD
   <data name="add_user_bg_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\add_user-bg-1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -274,5 +281,6 @@
   <data name="you_dont_know_me" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\you-dont-know-me.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  
+=======
+>>>>>>> 18b6ef9b2e5c385012bdbdbd10e9f3bf0173ccf7
 </root>
