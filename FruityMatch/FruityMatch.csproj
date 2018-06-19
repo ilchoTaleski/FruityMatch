@@ -1,0 +1,418 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{623ED242-E49F-4973-A098-E16035CEC1C2}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>FruityMatch</RootNamespace>
+    <AssemblyName>FruityMatch</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddNewUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddNewUser.Designer.cs">
+      <DependentUpon>AddNewUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChangeAvatar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeAvatar.Designer.cs">
+      <DependentUpon>ChangeAvatar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChangeUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeUser.Designer.cs">
+      <DependentUpon>ChangeUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChoosePlayingStyle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChoosePlayingStyle.Designer.cs">
+      <DependentUpon>ChoosePlayingStyle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fruit Collections\AppleCollection.cs" />
+    <Compile Include="Player\AutomaticGame.cs" />
+    <Compile Include="ChoosingCombinations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChoosingCombinations.Designer.cs">
+      <DependentUpon>ChoosingCombinations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Game.cs" />
+    <Compile Include="Fruit Collections\LemonCollection.cs" />
+    <Compile Include="Napkins and Plates\LittlePlate.cs" />
+    <Compile Include="Napkins and Plates\LittlePlates.cs" />
+    <Compile Include="Fruit Collections\PeachCollection.cs" />
+    <Compile Include="Player\Player.cs" />
+    <Compile Include="Fruit Collections\PlumCollection.cs" />
+    <Compile Include="Fruits\Watermelon.cs" />
+    <Compile Include="Fruits\Apple.cs" />
+    <Compile Include="Player\FruitsDocument.cs" />
+    <Compile Include="Fruit Collections\WatermelonCollection.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fruits\Fruit.cs" />
+    <Compile Include="Fruit Collections\FruitCollection.cs" />
+    <Compile Include="Fruits\Lemon.cs" />
+    <Compile Include="Napkins and Plates\Napkin.cs" />
+    <Compile Include="Napkins and Plates\NapkinCollection.cs" />
+    <Compile Include="Fruits\Orange.cs" />
+    <Compile Include="Fruit Collections\OrangeCollection.cs" />
+    <Compile Include="Fruits\Peach.cs" />
+    <Compile Include="Fruits\Plum.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RevealingCombinations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RevealingCombinations.Designer.cs">
+      <DependentUpon>RevealingCombinations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UniqueIDGenerator.cs" />
+    <Compile Include="User.cs" />
+    <EmbeddedResource Include="AddNewUser.resx">
+      <DependentUpon>AddNewUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeAvatar.resx">
+      <DependentUpon>ChangeAvatar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeUser.resx">
+      <DependentUpon>ChangeUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChoosePlayingStyle.resx">
+      <DependentUpon>ChoosePlayingStyle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChoosingCombinations.resx">
+      <DependentUpon>ChoosingCombinations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RevealingCombinations.resx">
+      <DependentUpon>RevealingCombinations.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\DataSources\Form1.datasource" />
+    <None Include="Properties\DataSources\FruityMatch.Properties.Resources.datasource" />
+    <None Include="Properties\DataSources\FruityMatch.Properties.Settings.datasource" />
+    <None Include="Properties\DataSources\Program.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iloveimg-resized\Thumbs.db" />
+    <None Include="Resources\play.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\orange.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\orange.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\obv1J.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PtYf4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\transparent.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Orange-PNG-Image-41142.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rustic-pine-table.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delicious-assortment-fresh-fruit-laid-out-border-white-rustic-background-top-view-superfoods-health-detox-die-73554683.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FruityMatch-play.jpg" />
+    <None Include="Resources\salfetki-10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salfetki-11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salfetki-00.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salfetki-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salfetki-02.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salfetki-03.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salfetki-04.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salfetki-10.png" />
+    <None Include="Resources\salfetki-12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salfetki-13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salfetki-20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salfetki-21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salfetki-22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salfetki-30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salfetki-40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salfetki-12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salfetki-13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salfetki-20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salfetki-21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salfetki-22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salfetki-30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\20028593001_front_a01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\585ea3a0cb11b227491c3517.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Webp.net-resizeimage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Webp.net-resizeimage %281%29.jpg" />
+    <None Include="Resources\FruityMatch-3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\apple.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\peach.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plum.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iloveimg-resized\salfetki-21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iloveimg-resized\salfetki-22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iloveimg-resized\salfetki-30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iloveimg-resized\salfetki-40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iloveimg-resized\salfetki-00.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iloveimg-resized\salfetki-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iloveimg-resized\salfetki-02.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iloveimg-resized\salfetki-03.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iloveimg-resized\salfetki-04.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iloveimg-resized\salfetki-10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iloveimg-resized\salfetki-11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iloveimg-resized\salfetki-12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iloveimg-resized\salfetki-13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iloveimg-resized\salfetki-20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\avocado.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\watermelon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\orange.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lemon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\interface.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salfetki-match.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plate-combination.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\choose.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\image_play.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\515673362.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Webp.net-resizeimage %282%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salfetki-info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\default-avatar.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_user-bg-1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\avatar12.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\avatar1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\avatar2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\avatar3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\avatar4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\avatar5.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\avatar6.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\avatar7.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\avatar8.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\avatar9.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\avatar10.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\avatar11.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Users\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\feel-it-still.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\you-dont-know-me.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\turbo-pizza.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\change-user-bg.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pop_sound.wav" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
