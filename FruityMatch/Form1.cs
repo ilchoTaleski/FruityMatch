@@ -45,6 +45,10 @@ namespace FruityMatch
         private Dictionary<string, Tuple<int, int>> endButtonPosition { get; set; }
         private Dictionary<string, Tuple<int, int>> quitButtonPosition { get; set; }
         private Dictionary<string, Tuple<int, int>> rankingsButtonPosition { get; set; }
+        private Dictionary<string, Tuple<int, int>> behind1ButtonPosition { get; set; }
+        private Dictionary<string, Tuple<int, int>> behind2ButtonPosition { get; set; }
+        private Dictionary<string, Tuple<int, int>> helpPosition { get; set; }
+        private Dictionary<string, Tuple<int, int>> controlsPosition { get; set; }
         private GifImage gif { get; set; }
         public static int usersCount = 1;
         public bool switcher;
@@ -61,6 +65,7 @@ namespace FruityMatch
             this.Icon = Properties.Resources.icon;
             this.Name = "Fruity Match";
             this.Text = "Fruity Match";
+            
 
             gif = new GifImage(Properties.Resources.computer_avatar);
 
@@ -130,7 +135,9 @@ namespace FruityMatch
 
             switcher = true;
             hasTicked = false;
+            timer1 = new System.Windows.Forms.Timer();
             timer1.Start();
+            timer2.Start();
 
         }
 
@@ -226,6 +233,19 @@ namespace FruityMatch
                 {"position",  Tuple.Create(rankingsButton.Left, rankingsButton.Top)},
                 {"size",  Tuple.Create(rankingsButton.Width, rankingsButton.Height)}
             };
+
+            helpPosition = new Dictionary<string, Tuple<int, int>>()
+            {
+                {"position",  Tuple.Create(button1.Left, button1.Top)},
+                {"size",  Tuple.Create(button1.Width, button1.Height)}
+            };
+
+            controlsPosition = new Dictionary<string, Tuple<int, int>>()
+            {
+                {"position",  Tuple.Create(button2.Left, button2.Top)},
+                {"size",  Tuple.Create(button2.Width, button2.Height)}
+            };
+
         }
 
         public void initializeItemsPositions()
@@ -248,6 +268,8 @@ namespace FruityMatch
             updateButton(newButton, startButtonPosition);
             updateButton(quitButton, quitButtonPosition);
             updateButton(rankingsButton, rankingsButtonPosition);
+            updateButton(button1, helpPosition);
+            updateButton(button2, controlsPosition);
             updateLabel(welcomeLabel, welcomeLabelPosition);
             updateLabel(label1, startLabelPosition);
             updateLabel(secondPlayerName, secondPlayerLabelPosition);
@@ -705,13 +727,38 @@ namespace FruityMatch
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            if(game!= null) game.Draw(e.Graphics);
+            if (game != null)
+            {
+
+                /*if (game.player1.turn && hasTicked)
+                {
+                    hasTicked = false;
+                    if (switcher)
+                    {
+                        this.avatarPicture.BackgroundImageLayout = ImageLayout.Center;
+                        this.avatarPicture.BackColor = Color.Red;
+                        this.avatarPicture.Padding = new Padding(5, 5, 5, 5);
+                        ControlPaint.DrawBorder(e.Graphics, this.avatarPicture.ClientRectangle, Color.Red, ButtonBorderStyle.Solid);
+
+                    }
+                    else
+                    {
+                        this.avatarPicture.BackgroundImageLayout = ImageLayout.Stretch;
+                        this.avatarPicture.BackColor = Color.White;
+                        this.avatarPicture.Padding = new Padding(0, 0, 0, 0);
+                        ControlPaint.DrawBorder(e.Graphics, this.avatarPicture.ClientRectangle, Color.White, ButtonBorderStyle.Solid);
+                    }
+                }*/
+
+            }
+            if (game!= null) game.Draw(e.Graphics);
             
         }
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
-            if(game != null)
+            timer1.Start();
+            if (game != null)
             {
                 if (MouseButtons.Left == e.Button)
                 {
@@ -731,6 +778,7 @@ namespace FruityMatch
                     }
                     if (game.selectedFruit != null)
                         game.selectedFruit.MoveTo(e.X, e.Y);
+                    
                 }
                 
                 Napkin napkin = game.getNapkin(e.X, e.Y);
@@ -746,9 +794,11 @@ namespace FruityMatch
                         napkin.changeNapkin("00");
                     }
                 }
+                
             }
+
+            //Invalidate(true);
             
-            Invalidate(true);
         }
 
         private void Form1_MouseUp(object sender, MouseEventArgs e)
@@ -966,9 +1016,10 @@ namespace FruityMatch
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            
             if (game != null)
             {
-                hasTicked = true;
+                
                 if (switcher)
                 {
                     switcher = false;
@@ -977,7 +1028,7 @@ namespace FruityMatch
                 {
                     switcher = true;
                 }
-                Invalidate(true);
+               // Invalidate(true);
             }
         }
 
@@ -985,19 +1036,23 @@ namespace FruityMatch
         {
             if ( game != null)
             {
+
                
-                if (game.player1.turn && hasTicked)
+                if (game.player1.turn)
                 {
-                    hasTicked = false;
-                    if (switcher)
-                    {
-                        ControlPaint.DrawBorder(e.Graphics, this.avatarPicture.ClientRectangle, Color.Red, ButtonBorderStyle.Solid);
-                       
-                    }
-                    else
-                    {
-                        ControlPaint.DrawBorder(e.Graphics, this.avatarPicture.ClientRectangle, Color.White, ButtonBorderStyle.Solid);
-                    }
+                    PictureBox pb = this.avatarPicture;
+                        
+                        if (switcher)
+                        {
+                            ControlPaint.DrawBorder(e.Graphics, pb.ClientRectangle, Color.Red, ButtonBorderStyle.Solid);
+
+                        }
+                        else
+                        {
+                            ControlPaint.DrawBorder(e.Graphics, pb.ClientRectangle, Color.White, ButtonBorderStyle.Solid);
+                        }
+
+                    
                 }
                 
             }
@@ -1008,18 +1063,22 @@ namespace FruityMatch
             if (game != null)
             {
 
-                if (game.player2.turn && hasTicked)
+                if (game.player2.turn)
                 {
-                    hasTicked = false;
-                    if (switcher)
-                    {
-                        ControlPaint.DrawBorder(e.Graphics, this.secoudPlayerPicture.ClientRectangle, Color.Red, ButtonBorderStyle.Solid);
+                        
+                        if (switcher)
+                        {
 
-                    }
-                    else
-                    {
-                        ControlPaint.DrawBorder(e.Graphics, this.secoudPlayerPicture.ClientRectangle, Color.White, ButtonBorderStyle.Solid);
-                    }
+
+                            ControlPaint.DrawBorder(e.Graphics, this.secoudPlayerPicture.ClientRectangle, Color.Red, ButtonBorderStyle.Solid);
+
+                        }
+                        else
+                        {
+                            ControlPaint.DrawBorder(e.Graphics, this.secoudPlayerPicture.ClientRectangle, Color.White, ButtonBorderStyle.Solid);
+                        }
+
+                    
                 }
 
             }
@@ -1047,8 +1106,21 @@ namespace FruityMatch
 
         private void button1_Click_6(object sender, EventArgs e)
         {
-            howToPlayTextBox.Visible = !howToPlayTextBox.Visible;
+            //howToPlayTextBox.Visible = !howToPlayTextBox.Visible;
+            //Invalidate(true);
+            Help h = new Help();
+            h.ShowDialog();
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
             Invalidate(true);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ControlsDetails cd = new ControlsDetails();
+            cd.ShowDialog();
         }
     }
 }

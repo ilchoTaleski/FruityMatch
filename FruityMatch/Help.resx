@@ -117,10 +117,42 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="timer2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>104, 17</value>
-  </metadata>
+  <data name="label3.Text" xml:space="preserve">
+    <value>One player makes a code by combining different fruits, and the other player tries to guess the code in as few tries as possible.
+
+To play, the two players secretly make a code with a combination of fruits and the codes are then hidden. The player on move (whose avatar is blinking) then makes a guess by placing fruits on the adequate plates that are highlighited with red. Then the player making the guess proceeds to press on the napkins next to the highlighted plates and results of the guess are shown.
+
+The blue Correct Fruit &amp; Position result tells you how many fruits are the correct fruit and are in the correct place, whereas the black Correct Fruits Incorrect Position result tells you how many fruits are the correct fruit but are not in the correct place. This information helps you make an educated guess at the code in future turns.</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>1. To guess the other player's combination, create a code by moving Fruits to the board. Then click the napkin next to the plates to submit the code.
+There are three ways to move Fruits to the board: Drag each fruit to the appropriate plate on the board. 
+
+Right-click or double-click on one of the fruits in the big plates to automatically move a fruit to the next available plate on the board.
+To remove a fruit from the active plates, right-click the fruit.
+
+2. On each turn, make a guess by moving fruits to the board (as described above). For your first guess, use the very first row. For each subsequent guess, move down one row.
+You must place a fruit in each plate.
+
+3. When you’ve made your guess, click the napkin ("Match?") next to the row plates of your guess to see how you did.
+
+4. Continue guessing until you guess the code or run out of guesses (you run out when you fill every row on the board).</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>You can play Fruity Match with two players or against a computer.
+
+In the standard player versus player, each player makes a code for the other player to guess. Then, you and the other player simultaneously try to guess each others’ codes.
+
+In the against a computer version, you’re playing against a computer player that makes a code for you and you try to guess it. 
+</value>
+  </data>
+  <data name="label9.Text" xml:space="preserve">
+    <value>Winning is achieved with guessing the opponents code in less tries than the opponent. If both players guess the code in equal tries the game is tied.
+
+Win: Winning is awarded with 10 points in our ranking system. 
+Lose: Losing is awarded with 0 points in our ranking system.
+Tie: Tie is awarded with 5 points in our ranking system.
+
+You can check how you fare against other users by clicking the Rankings button on the starting page of the game.</value>
+  </data>
 </root>

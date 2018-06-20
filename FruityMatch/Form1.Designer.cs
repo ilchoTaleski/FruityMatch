@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.salfetkiInfo = new System.Windows.Forms.PictureBox();
             this.endButton = new System.Windows.Forms.Button();
             this.newButton = new System.Windows.Forms.Button();
@@ -44,8 +43,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.rankingsButton = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.howToPlayTextBox = new System.Windows.Forms.RichTextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.salfetkiInfo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.avatarPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.secoudPlayerPicture)).BeginInit();
@@ -231,24 +231,8 @@
             // timer1
             // 
             this.timer1.Enabled = true;
-            this.timer1.Interval = 500;
+            this.timer1.Interval = 750;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // howToPlayTextBox
-            // 
-            this.howToPlayTextBox.BackColor = System.Drawing.Color.Gainsboro;
-            this.howToPlayTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.howToPlayTextBox.Font = new System.Drawing.Font("Metropolis Semi Bold", 9F, System.Drawing.FontStyle.Italic);
-            this.howToPlayTextBox.ForeColor = System.Drawing.Color.Maroon;
-            this.howToPlayTextBox.Location = new System.Drawing.Point(110, 2);
-            this.howToPlayTextBox.Margin = new System.Windows.Forms.Padding(10);
-            this.howToPlayTextBox.Name = "howToPlayTextBox";
-            this.howToPlayTextBox.ReadOnly = true;
-            this.howToPlayTextBox.Size = new System.Drawing.Size(394, 246);
-            this.howToPlayTextBox.TabIndex = 20;
-            this.howToPlayTextBox.Text = resources.GetString("howToPlayTextBox.Text");
-            this.howToPlayTextBox.Visible = false;
-            this.howToPlayTextBox.MouseEnter += new System.EventHandler(this.howToPlayTextBox_MouseEnter);
             // 
             // button1
             // 
@@ -268,12 +252,33 @@
             this.button1.MouseEnter += new System.EventHandler(this.button1_MouseEnter);
             this.button1.MouseLeave += new System.EventHandler(this.button1_MouseLeave);
             // 
+            // timer2
+            // 
+            this.timer2.Interval = 20;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Maroon;
+            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.button2.Location = new System.Drawing.Point(863, 5);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(98, 32);
+            this.button2.TabIndex = 15;
+            this.button2.Text = "Controls";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form1
             // 
             this.BackgroundImage = global::FruityMatch.Properties.Resources.image_play;
             this.ClientSize = new System.Drawing.Size(973, 698);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.howToPlayTextBox);
             this.Controls.Add(this.rankingsButton);
             this.Controls.Add(this.fullScreenButton);
             this.Controls.Add(this.quitButton);
@@ -323,8 +328,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button rankingsButton;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.RichTextBox howToPlayTextBox;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Button button2;
     }
 }
 
