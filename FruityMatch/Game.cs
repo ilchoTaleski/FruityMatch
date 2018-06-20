@@ -15,7 +15,10 @@ namespace FruityMatch
         public Player player2 { get; set; }
         public String name1 { get; set; }
         public String name2 { get; set; }
-        public Game(List<Fruit> player1, List<Fruit> player2, String player1Name, String player2Name)
+        public User firstUser { get; set; }
+        public User secondUser { get; set; }
+        public int mode { get; set; }
+        public Game(List<Fruit> player1, List<Fruit> player2, String player1Name, String player2Name, bool isComputer)
         {
             doc = new FruitsDocument();
             List<Fruit> fruits = new List<Fruit>();
@@ -25,11 +28,20 @@ namespace FruityMatch
             fruits.Add(new Watermelon(5, 5, 5, 5));
             selectedFruit = null;
 
+            mode = 1;
+
             name1 = player1Name;
             name2 = player2Name;
-            this.player1 = new Player(true, 0, player1);
-            this.player2 = new Player(false, 1, player2);
-            //this.player2.isComputer = true;
+            this.player1 = new Player(true, 0, player1, name1);
+            this.player2 = new Player(false, 1, player2, name2);
+            this.player2.isComputer = isComputer;
+
+        }
+
+        public void setUsers(User first, User second)
+        {
+            firstUser = first;
+            secondUser = second;
         }
 
         public Player getActivePlayer()
@@ -121,14 +133,26 @@ namespace FruityMatch
             {
                 if ((player1.previousGuess == "40" && player2.previousGuess == "40") || getActiveRow() +1 >= 10)
                 {
+                    firstUser.ties++;
+                    secondUser.ties++;
+                    firstUser.points += 5;
+                    secondUser.points += 5;
                     return "It's a tie";
+                    
+
                 }
                 else if (player1.previousGuess == "40")
                 {
+                    firstUser.wins++;
+                    secondUser.losses++;
+                    firstUser.points += 10;
                     return name1 + " wins";
                 }
                 else if (player2.previousGuess == "40")
                 {
+                    secondUser.wins++;
+                    firstUser.losses++;
+                    secondUser.points += 10;
                     return name2+ " wins";
                 }
                 else

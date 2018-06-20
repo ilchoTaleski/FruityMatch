@@ -253,6 +253,26 @@ namespace FruityMatch.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap computer_avatar {
+            get {
+                object obj = ResourceManager.GetObject("computer_avatar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap computer_avatar_still {
+            get {
+                object obj = ResourceManager.GetObject("computer_avatar_still", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap default_avatar {
             get {
                 object obj = ResourceManager.GetObject("default_avatar", resourceCulture);
@@ -266,6 +286,16 @@ namespace FruityMatch.Properties {
         internal static System.IO.UnmanagedMemoryStream feel_it_still {
             get {
                 return ResourceManager.GetStream("feel_it_still", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap fruity_text {
+            get {
+                object obj = ResourceManager.GetObject("fruity_text", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -286,6 +316,26 @@ namespace FruityMatch.Properties {
             get {
                 object obj = ResourceManager.GetObject("FruityMatch_play", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap fruitytext1 {
+            get {
+                object obj = ResourceManager.GetObject("fruitytext1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon icon {
+            get {
+                object obj = ResourceManager.GetObject("icon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         

@@ -274,5 +274,19 @@
   <data name="you_dont_know_me" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\you-dont-know-me.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  
+  <data name="fruitytext1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fruitytext1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fruity_text" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fruity-text.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="computer_avatar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\computer-avatar.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="computer_avatar_still" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\computer-avatar-still.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

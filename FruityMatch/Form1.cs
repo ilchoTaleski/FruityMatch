@@ -8,6 +8,7 @@ using System.Linq;
 using System.Media;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -16,6 +17,7 @@ namespace FruityMatch
     [Serializable]
     public partial class Form1 : Form
     {
+        
         private Game game;
         private ChoosingCombinations from;
         private SoundPlayer soundplayer { get; set; }
@@ -23,6 +25,7 @@ namespace FruityMatch
         private List<User> users;
         private bool fullScreenMode { get; set; }
         private User currentUser;
+        private int modeSelected;
         private UniqueIDGenerator uniqueID { get; set; }
         public static int counter = 0;
         public static double ratioX = 1;
@@ -41,14 +44,26 @@ namespace FruityMatch
         private Dictionary<string, Tuple<int, int>> startButtonPosition { get; set; }
         private Dictionary<string, Tuple<int, int>> endButtonPosition { get; set; }
         private Dictionary<string, Tuple<int, int>> quitButtonPosition { get; set; }
+        private Dictionary<string, Tuple<int, int>> rankingsButtonPosition { get; set; }
+        private GifImage gif { get; set; }
         public static int usersCount = 1;
+        public bool switcher;
+        public bool hasTicked;
         public Form1()
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             //FormBorderStyle = FormBorderStyle.None;
             //WindowState = FormWindowState.Maximized;
-            
+
+            initializeFolders();
+            modeSelected = 1;
+            this.Icon = Properties.Resources.icon;
+            this.Name = "Fruity Match";
+            this.Text = "Fruity Match";
+
+            gif = new GifImage(Properties.Resources.computer_avatar);
+
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             notInitialized = false;
@@ -113,8 +128,16 @@ namespace FruityMatch
                 sortUsers();
             }
 
-            
+            switcher = true;
+            hasTicked = false;
+            timer1.Start();
 
+        }
+
+        public void initializeFolders()
+        {
+            Directory.CreateDirectory(@".\Users");
+            Directory.CreateDirectory(@".\UniqueID");
         }
 
         public void initializePictures()
@@ -149,7 +172,8 @@ namespace FruityMatch
             startLabelPosition = new Dictionary<string, Tuple<int, int>>()
             {
                 {"position",  Tuple.Create(label1.Left, label1.Top)},
-                {"size",  Tuple.Create(label1.Width, label1.Height)}
+                {"size",  Tuple.Create(label1.Width, label1.Height)},
+                {"font", Tuple.Create(13,15) }
             };
 
             secondPlayerLabelPosition = new Dictionary<string, Tuple<int, int>>()
@@ -196,6 +220,12 @@ namespace FruityMatch
                 {"position",  Tuple.Create(quitButton.Left, quitButton.Top)},
                 {"size",  Tuple.Create(quitButton.Width, quitButton.Height)}
             };
+
+            rankingsButtonPosition = new Dictionary<string, Tuple<int, int>>()
+            {
+                {"position",  Tuple.Create(rankingsButton.Left, rankingsButton.Top)},
+                {"size",  Tuple.Create(rankingsButton.Width, rankingsButton.Height)}
+            };
         }
 
         public void initializeItemsPositions()
@@ -217,10 +247,18 @@ namespace FruityMatch
             updateButton(endButton, endButtonPosition);
             updateButton(newButton, startButtonPosition);
             updateButton(quitButton, quitButtonPosition);
+            updateButton(rankingsButton, rankingsButtonPosition);
             updateLabel(welcomeLabel, welcomeLabelPosition);
             updateLabel(label1, startLabelPosition);
             updateLabel(secondPlayerName, secondPlayerLabelPosition);
             updateLabel(player1Name, firstPlayerLabelPosition);
+            if(fullScreenMode)
+            {
+                label1.Font = new Font(label1.Font.FontFamily, 19);
+            } else
+            {
+                label1.Font = new Font(label1.Font.FontFamily, 13);
+            }
 
 
 
@@ -432,7 +470,8 @@ namespace FruityMatch
         {
 
             ChoosePlayingStyle chooseForm = new ChoosePlayingStyle();
-            if (chooseForm.ShowDialog() == DialogResult.OK)
+            DialogResult style = chooseForm.ShowDialog();
+            if (style == DialogResult.OK)
             {
                // MessageBox.Show(this.Width + " " + this.Height);
                 ChangeUser userForm = new ChangeUser(users, uniqueID, true);
@@ -446,14 +485,16 @@ namespace FruityMatch
                         SerializeUser(u);
                     }
 
-                    from = new ChoosingCombinations(player1Name.Text, secondPlayerName.Text);
+                    from = new ChoosingCombinations(player1Name.Text, secondPlayerName.Text, false);
                    
                     DialogResult result = from.ShowDialog();
                     if (result == DialogResult.OK)
                     {
-                        game = new Game(from.player1Comb, from.player2Comb, player1Name.Text, secondPlayerName.Text);
+                        game = new Game(from.player1Comb, from.player2Comb, player1Name.Text, secondPlayerName.Text, false);
+                        game.setUsers(currentUser, userForm.selectedUser);
                         fullScreenButton.Visible = false;
                         quitButton.Visible = false;
+                        rankingsButton.Visible = false;
 
                         setStartGame();
                         try
@@ -475,13 +516,44 @@ namespace FruityMatch
 
                 }
 
+            } else if(style == DialogResult.Yes)
+            {
+                User computerPlayer = new User("Grasshopper",-1);
+                computerPlayer.changeAvatar(Properties.Resources.computer_avatar_still);
+                from = new ChoosingCombinations(player1Name.Text, secondPlayerName.Text, true);
+                DialogResult result = from.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    initializeSecondPlayer(computerPlayer);
+                    game = new Game(from.player1Comb, from.player2Comb, player1Name.Text, secondPlayerName.Text, true);
+                    game.setUsers(currentUser, computerPlayer);
+                    fullScreenButton.Visible = false;
+                    quitButton.Visible = false;
+                    rankingsButton.Visible = false;
+                    setStartGame();
+
+                }
+                else
+                {
+                    terminateGame();
+                }
+                
             }
 
-            
+
         }
 
         public void terminateGame()
         {
+            if(game != null)
+            {
+                if (game.firstUser != null && game.secondUser != null)
+                {
+                    if (!game.player1.isComputer) SerializeUser(game.firstUser);
+                    if (!game.player2.isComputer) SerializeUser(game.secondUser);
+                }
+            }
+            
             game = null;
             this.BackgroundImage = Properties.Resources.image_play;
             salfetkiInfo.Visible = false;
@@ -495,7 +567,8 @@ namespace FruityMatch
             secoudPlayerPicture.Visible = false;
             fullScreenButton.Visible = true;
             quitButton.Visible = true;
-         
+            rankingsButton.Visible = true;
+
         }
 
         public void removeFromPlate(int x, int y)
@@ -538,6 +611,8 @@ namespace FruityMatch
             if (MouseButtons.Right == e.Button && game != null)
             {
                 removeFromPlate(e.X, e.Y);
+                Fruit fr = game.doc.fruitIfHit(e.X, e.Y);
+                placeFruit(fr);
             }
             if(MouseButtons.Left == e.Button && game != null)
             {
@@ -557,19 +632,56 @@ namespace FruityMatch
                         {
                             nextTurn(napkin, s);
                             Player igrac = game.getActivePlayer();
-                            if (igrac.isComputer)
-                            {
-                                napkin = game.getActivePlayer().napkins.napkins[0];
-                                igrac.guessFruits();
-                                s = game.matchingCombination();
 
-                                nextTurn(napkin, s);
+                            if(igrac.isComputer)
+                            {
+
+                                this.secoudPlayerPicture.Image = Properties.Resources.computer_avatar;
+                                
+
+                                
+                                napkin = igrac.getCurrentNapkin();
+                                List<LittlePlate> lps = igrac.getCurrentPlates();
+                                List<Fruit> fruitComb = igrac.autoplay.nextCombination();
+                                for(int i=0; i<4; i++)
+                                {
+                                    fruitComb[i].MoveTo(lps[i].position.X, lps[i].position.Y);
+                                    lps[i].fruitOn = fruitComb[i];
+                                    Invalidate(true);
+                                }
+
+                                
+
+                                s = game.matchingCombination();
+                                gameStatus = game.gameStatus();
+                                if(gameStatus == "continue")
+                                {
+                                    nextTurn(napkin, s);
+                                }else
+                                {
+                                    nextTurn(napkin, s);
+                                    RevealingCombinations revealForm = new RevealingCombinations(game.player1, game.player2, gameStatus);
+                                    DialogResult result = revealForm.ShowDialog();
+                                    if (result == DialogResult.OK)
+                                    {
+                                        initializeGame();
+                                    }
+                                    else
+                                    {
+                                        terminateGame();
+                                    }
+                                }
+
+
+
+
                             }
+                            
                         }
                         else
                         {
                             nextTurn(napkin, s);
-                            RevealingCombinations revealForm = new RevealingCombinations(game.player1.combination, game.player2.combination, gameStatus);
+                            RevealingCombinations revealForm = new RevealingCombinations(game.player1, game.player2, gameStatus);
                             DialogResult result = revealForm.ShowDialog();
                             if (result == DialogResult.OK)
                             {
@@ -690,10 +802,8 @@ namespace FruityMatch
            
         }
 
-        private void Form1_MouseDoubleClick(object sender, MouseEventArgs e)
+        public void placeFruit(Fruit fr)
         {
-            Fruit fr = game.doc.fruitIfHit(e.X, e.Y);
-
             if (fr != null)
             {
                 try
@@ -712,9 +822,16 @@ namespace FruityMatch
                 {
                     fr.MoveTo(nextPlate.position.X, nextPlate.position.Y);
                     nextPlate.fruitOn = fr;
-                    
+
                 }
             }
+        }
+
+        private void Form1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Fruit fr = game.doc.fruitIfHit(e.X, e.Y);
+            placeFruit(fr);
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -839,6 +956,99 @@ namespace FruityMatch
         private void quitButton_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void button1_Click_5(object sender, EventArgs e)
+        {
+            Rankings rank = new Rankings();
+            rank.ShowDialog();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (game != null)
+            {
+                hasTicked = true;
+                if (switcher)
+                {
+                    switcher = false;
+                }
+                else
+                {
+                    switcher = true;
+                }
+                Invalidate(true);
+            }
+        }
+
+        private void avatarPicture_Paint(object sender, PaintEventArgs e)
+        {
+            if ( game != null)
+            {
+               
+                if (game.player1.turn && hasTicked)
+                {
+                    hasTicked = false;
+                    if (switcher)
+                    {
+                        ControlPaint.DrawBorder(e.Graphics, this.avatarPicture.ClientRectangle, Color.Red, ButtonBorderStyle.Solid);
+                       
+                    }
+                    else
+                    {
+                        ControlPaint.DrawBorder(e.Graphics, this.avatarPicture.ClientRectangle, Color.White, ButtonBorderStyle.Solid);
+                    }
+                }
+                
+            }
+        }
+
+        private void secoudPlayerPicture_Paint(object sender, PaintEventArgs e)
+        {
+            if (game != null)
+            {
+
+                if (game.player2.turn && hasTicked)
+                {
+                    hasTicked = false;
+                    if (switcher)
+                    {
+                        ControlPaint.DrawBorder(e.Graphics, this.secoudPlayerPicture.ClientRectangle, Color.Red, ButtonBorderStyle.Solid);
+
+                    }
+                    else
+                    {
+                        ControlPaint.DrawBorder(e.Graphics, this.secoudPlayerPicture.ClientRectangle, Color.White, ButtonBorderStyle.Solid);
+                    }
+                }
+
+            }
+        }
+
+        private void button1_MouseEnter(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void button1_MouseLeave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void howToPlayTextBox_MouseEnter(object sender, EventArgs e)
+        {
+  
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_6(object sender, EventArgs e)
+        {
+            howToPlayTextBox.Visible = !howToPlayTextBox.Visible;
+            Invalidate(true);
         }
     }
 }

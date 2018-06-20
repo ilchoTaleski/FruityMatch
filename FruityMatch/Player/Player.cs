@@ -16,20 +16,22 @@ namespace FruityMatch
         public NapkinCollection napkins { get; set; }
         public bool isComputer { get; set; }
         public List<Fruit> combination;
-        public AutomaticGame autoPlay { get; set; }
         public Random rand { get; set; }
         public String previousGuess { get; set; }
-        public Player (bool turn, int playerID, List<Fruit> combination)
+        public AutomaticGame autoplay { get; set; }
+        public String name { get; set; }
+        public Player (bool turn, int playerID, List<Fruit> combination, String name)
         {
             this.combination = combination;
             this.turn = turn;
             this.isComputer = false;
-            autoPlay = new AutomaticGame();
-            autoPlay.addCombination(combination);
 
             littlePlates = new LittlePlates(playerID);
             napkins = new NapkinCollection(playerID);
             rand = new Random();
+            autoplay = new AutomaticGame();
+            autoplay.setCombination(combination);
+            this.name = name;
         }
 
         public void Draw(Graphics g)
@@ -56,75 +58,16 @@ namespace FruityMatch
             littlePlates.changeCanBeDrawn();
         }
 
-        public void guessCombination2_2()
+        public List<LittlePlate> getCurrentPlates()
         {
-            if (this.littlePlates.activeRow == 0)
-            {
-                List<LittlePlate> firstRow = littlePlates.plates[0];
-                int counter = 0;
-                foreach (LittlePlate lp in firstRow)
-                {
-                    Fruit fruit = null;
-                    int pos = rand.Next(0, 6);
-                    switch (counter)
-                    {
-                        case 0:
-                        case 1:
-                            fruit = new Orange(35, 35, 0, 0); break;
-                        case 2:
-                        case 3:
-                            fruit = new Watermelon(35, 35, 0, 0); break;
-                    }
-                    counter++;
-                    fruit.MoveTo(lp.position.X, lp.position.Y);
-                    lp.fruitOn = fruit;
-                    //Thread.Sleep(500);
-                }
-            }
+            return littlePlates.plates[littlePlates.activeRow];
         }
 
-        public void guessFruits()
+        public Napkin getCurrentNapkin()
         {
-            autoPlay.guessCombination2_2(this.littlePlates);
-            return;
-            Dictionary<int, Fruit> combinationMap = new Dictionary<int, Fruit>
-            {
-                {0, this.combination[0] },
-                {1, this.combination[1] },
-                {2, this.combination[2] },
-                {3, this.combination[3] }
-            };
-            Dictionary<int, Fruit> randomFruit = new Dictionary<int, Fruit>
-            {
-                {0, new Orange(35,35, 0,0) },
-                {1, new Watermelon(35,35, 0,0) },
-                {2, new Plum(35,35, 0,0) },
-                {3, new Lemon(35,35, 0,0) },
-                {4, new Apple(35,35, 0,0) },
-                {5, new Peach(35,35, 0,0) }
-            };
-            if(this.littlePlates.activeRow == 0)
-            {
-                List<LittlePlate> firstRow = littlePlates.plates[0];
-                foreach(LittlePlate lp in firstRow)
-                {
-                    Fruit fruit = null;
-                    int pos = rand.Next(0,6);
-                    switch (pos)
-                    {
-                        case 0: fruit = new Orange(35, 35, 0, 0); break;
-                        case 1: fruit = new Watermelon(35, 35, 0, 0); break;
-                        case 2: fruit = new Plum(35, 35, 0, 0); break;
-                        case 3: fruit = new Lemon(35, 35, 0, 0); break;
-                        case 4: fruit = new Apple(35, 35, 0, 0); break;
-                        case 5: fruit = new Peach(35, 35, 0, 0); break;
-                    }
-                    fruit.MoveTo(lp.position.X, lp.position.Y);
-                    lp.fruitOn = fruit;
-                    //Thread.Sleep(500);
-                }
-            }
+            return napkins.napkins[napkins.activeRow];
         }
+        
 
     }
 }

@@ -3,72 +3,153 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace FruityMatch
 {
     public class AutomaticGame
     {
-        public List<int> possibleOrange { get; set; }
-        public List<int> possibleWatermelon { get; set; }
-        public List<int> possiblePlum { get; set; }
-        public List<int> possibleLemon { get; set; }
-        public List<int> possibleApple { get; set; }
-        public List<int> possiblePeach { get; set; }
-        public List<int> sure { get; set; }
-        public List<int> sureNo { get; set; }
 
-        public static readonly List<Tuple<int, Tuple<int, int>>> statCombs =
-            new List<Tuple<int, Tuple<int, int>>>()
+
+
+        public List<String> combinations { get; set; }
+        public List<String> combinationsForDelete { get; set; }
+        public String playerCombination { get; set; }
+        public List<Fruit> fruitCombination { get; set; }
+        public String previousComb { get; set; }
+        public bool isFirstCombination { get; set; }
+        public static readonly Dictionary<Fruit.TYPE, string> fruitToString = new Dictionary<Fruit.TYPE, string>()
             {
-                Tuple.Create(0, new Tuple<int, int>(0, 0)),
-                Tuple.Create(1, new Tuple<int, int>(0, 1)),
-                Tuple.Create(2, new Tuple<int, int>(0, 2)),
-                Tuple.Create(3, new Tuple<int, int>(1, 0)),
-                Tuple.Create(4, new Tuple<int, int>(1, 1)),
-                Tuple.Create(5, new Tuple<int, int>(2, 0)),
-
+                { Fruit.TYPE.ORANGE, "1" },
+                { Fruit.TYPE.WATERMELON, "2" },
+                { Fruit.TYPE.PLUM, "3" },
+                { Fruit.TYPE.LEMON, "4" },
+                { Fruit.TYPE.APPLE, "5" },
+                { Fruit.TYPE.PEACH, "6" }
             };
-        public LinkedList<Tuple<int, int>> statistics { get; set; }
-        List<Fruit> combination { get; set; }
+        public static readonly Dictionary<char, string> charToFruit = new Dictionary<char, string>()
+            {
+                //{'1', new Orange(Form1.getRatioX(35), Form1.getRatioY(35),0,0) },
+                //{'2', new Watermelon(Form1.getRatioX(35), Form1.getRatioY(35),0,0) },
+                //{'3', new Plum(Form1.getRatioX(35), Form1.getRatioY(35),0,0) },
+                //{'4', new Lemon(Form1.getRatioX(35), Form1.getRatioY(35),0,0) },
+                //{'5', new Apple(Form1.getRatioX(35), Form1.getRatioY(35),0,0) },
+                //{'6', new Peach(Form1.getRatioX(35), Form1.getRatioY(35),0,0) },
+                {'1', "orange" },
+                {'2', "watermelon" },
+                {'3', "plum" },
+                {'4', "lemon" },
+                {'5', "apple" },
+                {'6', "peach" },
+
+
+
+        };
         public AutomaticGame()
         {
-            possibleOrange = new List<int>() { 0, 1, 2, 3, 4, 5 };
-            possibleWatermelon = new List<int>() { 0, 1, 2, 3, 4, 5 };
-            possiblePlum = new List<int>() { 0, 1, 2, 3, 4, 5 };
-            possibleLemon = new List<int>() { 0, 1, 2, 3, 4, 5 };
-            possibleApple = new List<int>() { 0, 1, 2, 3, 4, 5 };
-            possiblePeach = new List<int>() { 0, 1, 2, 3, 4, 5 };
-            sure = new List<int>();
-            sureNo = new List<int>();
-            statistics = new LinkedList<Tuple<int, int>>();
-            this.combination = new List<Fruit>();
+
+            fruitCombination = new List<Fruit>();
+            isFirstCombination = true;
+            previousComb = "";
+            
+            combinations = new List<String>();
+            combinationsForDelete = new List<String>();
+            initializeList();
+            //play();
         }
 
-        public void addCombination(List<Fruit> combination)
+        public void setCombination(List<Fruit> FruitCombination)
         {
-            foreach(Fruit f in combination)
+            fruitCombination = FruitCombination;
+            playerCombination = getStringOfFruits(FruitCombination);
+
+            
+
+        }
+
+        public static String getStringOfFruits(List<Fruit> FruitCombination)
+        {
+            String s = "";
+            foreach (Fruit f in FruitCombination)
             {
-                this.combination.Add(f);
+                s += fruitToString[f.type];
             }
+            return s;
         }
 
-        public Tuple<int, int> countCorrect(LittlePlates plates, int pos)
+        public List<Fruit> nextCombination()
         {
+            if(isFirstCombination)
+            {
+                previousComb = generateRandomCombination(false);
+                isFirstCombination = false;
+                //MessageBox.Show(previousComb);
+            }
+            else
+            {
+                String result = Match(previousComb, playerCombination);
+                deleteImpossible(result, previousComb);
+                previousComb = nextCombinationByMinMax();
+                //MessageBox.Show(previousComb);
+            }
+            return getFruitList(previousComb);
+        }
+
+        public void deleteImpossible(String result, string combination)
+        {
+            List<String> removed = new List<string>();
+            foreach (String comb in combinationsForDelete)
+            {
+                // if comb was the real combination it should give the same result
+                if (Match(combination, comb) != result)
+                {
+                    removed.Add(comb);
+                }
+            }
+            combinationsForDelete.RemoveAll(a => removed.Contains(a));
+        }
+        public int countImpossible(String result, string combination)
+        {
+            int counter = 0;
+            foreach (String comb in combinationsForDelete)
+            {
+                // if comb was the real combination it should give the same result
+                if (Match(combination, comb) != result)
+                {
+                    counter++;
+                }
+            }
+            return counter;
+        }
+
+
+        public String Match(String code, String playerCombination)
+        {
+
             int counterPlaces = 0, counterFruitsOnly = 0;
-            List<Fruit> copy = new List<Fruit>();
-
-            List<LittlePlate> littlePlates = plates.plates[pos];
-
-            foreach (Fruit f in combination)
+            List<Char> guessCode = new List<Char>()
             {
-                copy.Add(f);
-            }
+                code[0],
+                code[1],
+                code[2],
+                code[3]
+            };
+
+            List<Char> trueCode = new List<Char>()
+            {
+                playerCombination[0],
+                playerCombination[1],
+                playerCombination[2],
+                playerCombination[3]
+            };
+
+
             for (int i = 0; i < 4; i++)
             {
-                Fruit f1 = copy.ElementAt(i);
-                Fruit f2 = littlePlates.ElementAt(i).fruitOn;
+                char gC = guessCode[i];
+                char tC = trueCode[i];
 
-                if (f1.type == f2.type)
+                if (gC == tC)
                 {
                     counterPlaces++;
                 }
@@ -76,76 +157,168 @@ namespace FruityMatch
 
             for (int i = 0; i < 4; i++)
             {
-                Fruit f2 = littlePlates.ElementAt(i).fruitOn;
-
-                for (int j = 0; j < copy.Count; j++)
+                char tC = trueCode[i];
+                for (int j = 0; j < guessCode.Count; j++)
                 {
-                    Fruit f1 = copy.ElementAt(j);
-                    if (f1.type == f2.type)
+                    char gC = guessCode[j];
+                    if (tC == gC)
                     {
                         counterFruitsOnly++;
-                        copy.RemoveAt(j);
+                        guessCode.RemoveAt(j);
                         break;
                     }
                 }
             }
             counterFruitsOnly = counterFruitsOnly - counterPlaces;
-            return Tuple.Create(counterPlaces, counterFruitsOnly);
+            return counterPlaces.ToString() + counterFruitsOnly.ToString();
+
         }
 
-        public void guessCombination2_2(LittlePlates plates)
+        public static bool containsDigit(int number, int digit)
         {
-            if (plates.activeRow == 0)
+            while (number > 0)
             {
-                List<LittlePlate> firstRow = plates.plates[0];
-                int counter = 0;
-                foreach (LittlePlate lp in firstRow)
-                {
-                    Fruit fruit = null;
-                    //int pos = rand.Next(0, 6);
-                    switch (counter)
-                    {
-                        case 0:
-                        case 1:
-                            fruit = new Orange(35, 35, 0, 0); break;
-                        case 2:
-                        case 3:
-                            fruit = new Watermelon(35, 35, 0, 0); break;
-                    }
-                    counter++;
-                    fruit.MoveTo(lp.position.X, lp.position.Y);
-                    lp.fruitOn = fruit;
-                    //Thread.Sleep(500);
-                }
-                Tuple<int, int> colors_places = countCorrect(plates, 0);
+                int c = number % 10;
+                if (c == digit) return true;
+                number /= 10;
+            }
+            return false;
+        }
 
-                foreach(Tuple<int, Tuple<int, int>> t in statCombs)
+        public static bool checkAllDigitsDifferent(int number)
+        {
+            HashSet<int> setOfDigits = new HashSet<int>();
+            while(number > 0)
+            {
+                int c = number % 10;
+                setOfDigits.Add(c);
+                number /= 10;
+            }
+            return setOfDigits.Count() == 4;
+        }
+
+        public static String generateRandomCombination(bool allDifferent)
+        {
+            List<String> combList = new List<string>();
+            List<String> combListDifferent = new List<string>();
+            for (int i = 1111; i < 6666; i++)
+            {
+                if (!containsDigit(i, 0) && !containsDigit(i, 7) && !containsDigit(i, 8) && !containsDigit(i, 9))
                 {
-                    if (colors_places.Equals(t.Item2))
+                    if(allDifferent)
                     {
-                        guessSecondStep(t.Item1);
+                        if(checkAllDigitsDifferent(i))
+                        {
+                            combList.Add(i.ToString());
+                        }
+                    } else
+                    {
+                        combList.Add(i.ToString());
                     }
                 }
-                
+            }
+            Random rand = new Random();
+            int ind = rand.Next(0, combList.Count() - 1);
+
+            return combList[ind];
+        }
+
+        public static List<Fruit> getFruitList(String s)
+        {
+            List<Fruit> lista = new List<Fruit>();
+
+            for(int i=0; i<4; i++)
+            {
+                char c = s[i];
+                switch (c)
+                {
+                    case '1':
+                        lista.Add(new Orange(Form1.getRatioX(35), Form1.getRatioY(35), 0, 0));
+                        break;
+                    case '2':
+                        lista.Add(new Watermelon(Form1.getRatioX(35), Form1.getRatioY(35), 0, 0));
+                        break;
+                    case '3':
+                        lista.Add(new Plum(Form1.getRatioX(35), Form1.getRatioY(35), 0, 0));
+                        break;
+                    case '4':
+                        lista.Add(new Lemon(Form1.getRatioX(35), Form1.getRatioY(35), 0, 0));
+                        break;
+                    case '5':
+                        lista.Add(new Apple(Form1.getRatioX(35), Form1.getRatioY(35), 0, 0));
+                        break;
+                    case '6':
+                        lista.Add(new Peach(Form1.getRatioX(35), Form1.getRatioY(35), 0, 0));
+                        break;
+                }
+            }
+            return lista;
+
+        }
+
+        public void play()
+        {
+            initializeList();
+            String firstComb = generateRandomCombination(false);
+            while (firstComb != playerCombination)
+            {
+                String result = Match(firstComb, playerCombination);
+                deleteImpossible(result, firstComb);
+                firstComb = nextCombinationByMinMax();
+                //MessageBox.Show(firstComb);
             }
         }
 
-        public void guessSecondStep(int id)
+        public void initializeList()
         {
-            switch (id)
+            for (int i = 1; i <= 6; i++)
             {
-                case 0: guessSecondStep00(); break;
-                //case 1: guessSecondStep01(); break;
-                //case 2: guessSecondStep02(); break;
-                //case 3: guessSecondStep10(); break;
-                //case 4: guessSecondStep11(); break;
-                //case 5: guessSecondStep20(); break;
+                for (int j = 1; j <= 6; j++)
+                {
+                    for (int k = 1; k <= 6; k++)
+                    {
+                        for (int l = 1; l <= 6; l++)
+                        {
+                            String s = i.ToString() + j.ToString() + k.ToString() + l.ToString();
+                            combinations.Add(s);
+                            combinationsForDelete.Add(s);
+                        }
+                    }
+                }
             }
         }
 
-        public void guessSecondStep00()
+        public String nextCombinationByMinMax()
         {
+            Dictionary<int, String> score = new Dictionary<int, String>();
+            foreach (String s in combinationsForDelete)
+            {
+                List<int> numberOfImpossibles = new List<int>();
+                numberOfImpossibles.Add(countImpossible("00", s));
+                numberOfImpossibles.Add(countImpossible("10", s));
+                numberOfImpossibles.Add(countImpossible("01", s));
+                numberOfImpossibles.Add(countImpossible("11", s));
+                numberOfImpossibles.Add(countImpossible("20", s));
+                numberOfImpossibles.Add(countImpossible("02", s));
+                numberOfImpossibles.Add(countImpossible("03", s));
+                numberOfImpossibles.Add(countImpossible("04", s));
+                numberOfImpossibles.Add(countImpossible("40", s));
+                numberOfImpossibles.Add(countImpossible("22", s));
+                numberOfImpossibles.Add(countImpossible("21", s));
+                numberOfImpossibles.Add(countImpossible("12", s));
+                numberOfImpossibles.Add(countImpossible("30", s));
+                numberOfImpossibles.Add(countImpossible("13", s));
+
+                numberOfImpossibles.Sort();
+
+
+                score[numberOfImpossibles.Min()] = s;
+            }
+            int maxValue = score.Keys.Max();
+            return score[maxValue];
 
         }
+
+
     }
 }

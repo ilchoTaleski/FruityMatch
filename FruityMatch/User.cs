@@ -15,6 +15,7 @@ namespace FruityMatch
         public int wins { get; set; }
         public int losses { get; set; }
         public int ties { get; set; }
+        public int points;
         public bool defaultUser { get; set; }
         public int uniqueID { get; set; }
         public User(String name, int ID)
@@ -24,6 +25,7 @@ namespace FruityMatch
             wins = 0;
             losses = 0;
             ties = 0;
+            points = 0;
             defaultUser = false;
             this.uniqueID = ID;
         }

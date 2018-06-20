@@ -16,7 +16,7 @@ namespace FruityMatch
         public List<Fruit> player2Fruits { get; set; }
         public Dictionary<int, PictureBox> pictureBoxes { get; set; }
 
-        public RevealingCombinations(List<Fruit> fruits2, List<Fruit> fruits1, String gameStatus)
+        public RevealingCombinations(Player p1, Player p2, String gameStatus)
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -34,14 +34,16 @@ namespace FruityMatch
                 {7, pictureBox5 }
             };
             this.label1.Text = gameStatus;
+            groupBox1.Text = p1.name + " was guessing:";
+            groupBox2.Text = p2.name + " was guessing:";
             int counter = 0;
-            foreach (Fruit f in fruits1)
+            foreach (Fruit f in p1.combination)
             {
                 player1Fruits.Add(f);
                 pictureBoxes[counter].Image = f.globalFruitImage;
                 counter++;
             }
-            foreach (Fruit f in fruits2)
+            foreach (Fruit f in p2.combination)
             {
                 player2Fruits.Add(f);
                 pictureBoxes[counter].Image = f.globalFruitImage;

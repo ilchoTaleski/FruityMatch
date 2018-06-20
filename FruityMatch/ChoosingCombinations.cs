@@ -14,13 +14,16 @@ namespace FruityMatch
     {
         public List<Fruit> player1Comb, player2Comb;
         public Dictionary<String, PictureBox> indexses;
+        private AutomaticGame computer { get; set; }
         public int temporaryPosition;
         public bool firstChooses { get; set; }
         public Dictionary<String, PictureBox> fruitPosition;
         public Dictionary<String, Fruit> fruits;
-        public ChoosingCombinations(String name1, String name2)
+        public bool isComputer;
+        public ChoosingCombinations(String name1, String name2, bool isComputer)
         {
             InitializeComponent();
+
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             temporaryPosition = 0;
             indexses = new Dictionary<string, PictureBox>();
@@ -28,7 +31,19 @@ namespace FruityMatch
             fruits = new Dictionary<string, Fruit>();
             player1Comb = new List<Fruit>();
             player2Comb = new List<Fruit>();
-            
+            this.isComputer = isComputer;
+            player1Info.Text = player1Info.Text.Replace("Player1", name1);
+            player2Info.Text = player2Info.Text.Replace("Player2", name2);
+            groupBox1.Text = name1 + " sets the combination for " + name2 + " to guess";
+            groupBox3.Text = name2 + " sets the combination for " + name1 + " to guess";
+            if (isComputer)
+            {
+                player1Comb = AutomaticGame.getFruitList(AutomaticGame.generateRandomCombination(true));
+                player1Info.Visible = false;
+
+                groupBox1.Text = name1 + " sets the combination for Computer to guess";
+
+            }
             fruitPosition.Add("orange", orangeMenu);
             fruitPosition.Add("apple", appleMenu);
             fruitPosition.Add("watermelon", watermelonMenu);
@@ -62,10 +77,7 @@ namespace FruityMatch
             player2Info.Text = player2Info.Text.Replace("Player1", name1);
             player1Info.Text = player1Info.Text.Replace("Player2", name2);
 
-            player1Info.Text  = player1Info.Text.Replace("Player1", name1);
-            player2Info.Text = player2Info.Text.Replace("Player2", name2);
-            groupBox1.Text = name1 + " sets the combination for " + name2 + " to guess";
-            groupBox3.Text = name2 + " sets the combination for " + name1 + " to guess";
+            
         }
 
         public void setButtonVisibleIfReady()
@@ -263,6 +275,11 @@ namespace FruityMatch
             watermelonMenu.Image = Properties.Resources.watermelon;
             player1Info.Visible = false;
             player2Info.Visible = true;
+            if (isComputer)
+            {
+                DialogResult = DialogResult.OK;
+                this.Close();
+            }
         }
 
         private void label9_Click(object sender, EventArgs e)
