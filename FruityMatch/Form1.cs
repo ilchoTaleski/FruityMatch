@@ -890,6 +890,12 @@ namespace FruityMatch
                 }
                 usersCount = users.Count();
 
+            } else
+            {
+                if (users[0].isDefault())
+                {
+                    changeToNewUser(users[0]);
+                }
             }
         }
 
