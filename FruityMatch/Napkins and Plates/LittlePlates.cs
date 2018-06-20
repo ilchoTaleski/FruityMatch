@@ -25,16 +25,16 @@ namespace FruityMatch
             int x=0, y=0;
             if (playerID == 0)
             {
-                x = 257;
+                x = Form1.getRatioX(257);
                
             }else
             {
-                x = 595;
+                x = Form1.getRatioX(595);
                
             }
-            y = 215;
-            int dx = 41;
-            int dy = 47;
+            y = Form1.getRatioY(215);
+            int dx = Form1.getRatioX(41);
+            int dy = Form1.getRatioY(47);
 
             for (int i = 0; i < 10; i++)
             {

@@ -45,7 +45,7 @@ namespace FruityMatch
             int x = rand.Next(rectangle.X, rectangle.X + width);
             int height = rectangle.Height;
             int y = rand.Next(rectangle.Y, rectangle.Y + height);
-            return new Lemon(35, 35, x, y);
+            return new Lemon(Form1.getRatioX(35), Form1.getRatioY(35), x, y);
         }
     }
 }

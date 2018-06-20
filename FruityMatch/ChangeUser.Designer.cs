@@ -30,9 +30,10 @@
         {
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.changeAvatarButton = new System.Windows.Forms.Button();
             this.name = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.removeButton = new System.Windows.Forms.Button();
             this.tiesNumber = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.lossesNumber = new System.Windows.Forms.Label();
@@ -43,6 +44,7 @@
             this.done = new System.Windows.Forms.Button();
             this.cancel = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.InfoLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -60,7 +62,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::FruityMatch.Properties.Resources.avatar1;
+            this.pictureBox1.Image = global::FruityMatch.Properties.Resources.default_avatar;
             this.pictureBox1.Location = new System.Drawing.Point(20, 21);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(141, 158);
@@ -68,15 +70,15 @@
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
-            // button1
+            // changeAvatarButton
             // 
-            this.button1.Location = new System.Drawing.Point(20, 185);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(141, 35);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Change Avatar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.changeAvatarButton.Location = new System.Drawing.Point(20, 185);
+            this.changeAvatarButton.Name = "changeAvatarButton";
+            this.changeAvatarButton.Size = new System.Drawing.Size(141, 35);
+            this.changeAvatarButton.TabIndex = 2;
+            this.changeAvatarButton.Text = "Change Avatar";
+            this.changeAvatarButton.UseVisualStyleBackColor = true;
+            this.changeAvatarButton.Click += new System.EventHandler(this.button1_Click);
             // 
             // name
             // 
@@ -89,6 +91,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.Controls.Add(this.removeButton);
             this.groupBox1.Controls.Add(this.tiesNumber);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.lossesNumber);
@@ -98,13 +101,25 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.pictureBox1);
             this.groupBox1.Controls.Add(this.name);
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.changeAvatarButton);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(317, 226);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "User Settings";
+            // 
+            // removeButton
+            // 
+            this.removeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.removeButton.ForeColor = System.Drawing.Color.DarkRed;
+            this.removeButton.Location = new System.Drawing.Point(170, 185);
+            this.removeButton.Name = "removeButton";
+            this.removeButton.Size = new System.Drawing.Size(147, 35);
+            this.removeButton.TabIndex = 13;
+            this.removeButton.Text = "Remove User";
+            this.removeButton.UseVisualStyleBackColor = true;
+            this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
             // 
             // tiesNumber
             // 
@@ -200,12 +215,26 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // InfoLabel
+            // 
+            this.InfoLabel.AutoSize = true;
+            this.InfoLabel.BackColor = System.Drawing.Color.Transparent;
+            this.InfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.InfoLabel.ForeColor = System.Drawing.Color.DarkRed;
+            this.InfoLabel.Location = new System.Drawing.Point(9, 242);
+            this.InfoLabel.Name = "InfoLabel";
+            this.InfoLabel.Size = new System.Drawing.Size(303, 17);
+            this.InfoLabel.TabIndex = 14;
+            this.InfoLabel.Text = "No other user available, add a new user!";
+            this.InfoLabel.Visible = false;
+            // 
             // ChangeUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::FruityMatch.Properties.Resources.change_user_bg;
             this.ClientSize = new System.Drawing.Size(556, 305);
+            this.Controls.Add(this.InfoLabel);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.cancel);
             this.Controls.Add(this.done);
@@ -217,6 +246,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -224,7 +254,7 @@
 
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button changeAvatarButton;
         private System.Windows.Forms.TextBox name;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
@@ -237,5 +267,7 @@
         private System.Windows.Forms.Button done;
         private System.Windows.Forms.Button cancel;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button removeButton;
+        private System.Windows.Forms.Label InfoLabel;
     }
 }

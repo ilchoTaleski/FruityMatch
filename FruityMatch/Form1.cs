@@ -16,30 +16,56 @@ namespace FruityMatch
     [Serializable]
     public partial class Form1 : Form
     {
-        public Game game;
-        public ChoosingCombinations from;
-        public SoundPlayer soundplayer { get; set; }
-        public bool notInitialized { get; set; }
-        public List<User> users;
-        public User currentUser;
-        public UniqueIDGenerator uniqueID { get; set; }
+        private Game game;
+        private ChoosingCombinations from;
+        private SoundPlayer soundplayer { get; set; }
+        private bool notInitialized { get; set; }
+        private List<User> users;
+        private bool fullScreenMode { get; set; }
+        private User currentUser;
+        private UniqueIDGenerator uniqueID { get; set; }
         public static int counter = 0;
+        public static double ratioX = 1;
+        public static double ratioY = 1;
+        public static double formWidth = 980;
+        public static double formHeight = 700;
+        private Dictionary<string, Tuple<int, int>> avatarPosition { get; set; }
+        private Dictionary<string, Tuple<int, int>> salfetkiInfoPosition { get; set; }
+        private Dictionary<string, Tuple<int, int>> secondPlayerPicturePosition { get; set; }
+        private Dictionary<string, Tuple<int, int>> changeUserButtonPosition { get; set; }
+        private Dictionary<string, Tuple<int, int>> welcomeLabelPosition { get; set; }
+        private Dictionary<string, Tuple<int, int>> startLabelPosition { get; set; }
+        private Dictionary<string, Tuple<int, int>> secondPlayerLabelPosition { get; set; }
+        private Dictionary<string, Tuple<int, int>> firstPlayerLabelPosition { get; set; }
+        private Dictionary<string, Tuple<int, int>> fullScreenButtonPosition { get; set; }
+        private Dictionary<string, Tuple<int, int>> startButtonPosition { get; set; }
+        private Dictionary<string, Tuple<int, int>> endButtonPosition { get; set; }
+        private Dictionary<string, Tuple<int, int>> quitButtonPosition { get; set; }
+        public static int usersCount = 1;
         public Form1()
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            //FormBorderStyle = FormBorderStyle.None;
+            //WindowState = FormWindowState.Maximized;
+            
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             notInitialized = false;
             this.BackgroundImage = Properties.Resources.interface_bg;
-            this.Width = this.BackgroundImage.Width;
-            this.Height = this.BackgroundImage.Height + 40;
+            //this.Width = this.BackgroundImage.Width;
+            //this.Height = this.BackgroundImage.Height + 40;
             salfetkiInfo.Visible = false;
-
+            //FormBorderStyle = FormBorderStyle.None;
+            //WindowState = FormWindowState.Maximized;
+            this.Width = this.BackgroundImage.Width;
+            this.Height = this.BackgroundImage.Height;
             this.DoubleBuffered = true;
-
             uniqueID = loadUniqueID();
-           
+           // MessageBox.Show(ratioX + " " + ratioY);
+            updateProportions();
+            //MessageBox.Show(ratioX + " " + ratioY);
+           // MessageBox.Show(this.Width + " " + this.Height);
             //uniqueID = loadUniqueID();
 
             this.BackgroundImage = Properties.Resources.image_play;
@@ -47,7 +73,7 @@ namespace FruityMatch
             {
                 Stream str = Properties.Resources.feel_it_still;
                 soundplayer = new SoundPlayer(str);
-                soundplayer.Play();
+             //   soundplayer.Play();
             }
             catch(Exception e)
             {
@@ -88,7 +114,186 @@ namespace FruityMatch
             }
 
             
-               
+
+        }
+
+        public void initializePictures()
+        {
+            avatarPosition = new Dictionary<string, Tuple<int, int>>()
+            {
+                {"position",  Tuple.Create(avatarPicture.Left, avatarPicture.Top)},
+                {"size",  Tuple.Create(avatarPicture.Width, avatarPicture.Height)}
+            };
+
+            salfetkiInfoPosition = new Dictionary<string, Tuple<int, int>>()
+            {
+                {"position",  Tuple.Create(salfetkiInfo.Left, salfetkiInfo.Top)},
+                {"size",  Tuple.Create(salfetkiInfo.Width, salfetkiInfo.Height)}
+            };
+
+            secondPlayerPicturePosition = new Dictionary<string, Tuple<int, int>>()
+            {
+                {"position",  Tuple.Create(secoudPlayerPicture.Left, secoudPlayerPicture.Top)},
+                {"size",  Tuple.Create(secoudPlayerPicture.Width, secoudPlayerPicture.Height)}
+            };
+        }
+
+        public void initializeLabels()
+        {
+            welcomeLabelPosition = new Dictionary<string, Tuple<int, int>>()
+            {
+                {"position",  Tuple.Create(welcomeLabel.Left, welcomeLabel.Top)},
+                {"size",  Tuple.Create(welcomeLabel.Width, welcomeLabel.Height)}
+            };
+
+            startLabelPosition = new Dictionary<string, Tuple<int, int>>()
+            {
+                {"position",  Tuple.Create(label1.Left, label1.Top)},
+                {"size",  Tuple.Create(label1.Width, label1.Height)}
+            };
+
+            secondPlayerLabelPosition = new Dictionary<string, Tuple<int, int>>()
+            {
+                {"position",  Tuple.Create(secondPlayerName.Left, secondPlayerName.Top)},
+                {"size",  Tuple.Create(secondPlayerName.Width, secondPlayerName.Height)}
+            };
+
+            firstPlayerLabelPosition = new Dictionary<string, Tuple<int, int>>()
+            {
+                {"position",  Tuple.Create(player1Name.Left, player1Name.Top)},
+                {"size",  Tuple.Create(player1Name.Width, player1Name.Height)}
+            };
+        }
+
+        public void initializeButtons()
+        {
+            changeUserButtonPosition = new Dictionary<string, Tuple<int, int>>()
+            {
+                {"position",  Tuple.Create(changeUserButton.Left, changeUserButton.Top)},
+                {"size",  Tuple.Create(changeUserButton.Width, changeUserButton.Height)}
+            };
+
+            fullScreenButtonPosition = new Dictionary<string, Tuple<int, int>>()
+            {
+                {"position",  Tuple.Create(fullScreenButton.Left, fullScreenButton.Top)},
+                {"size",  Tuple.Create(fullScreenButton.Width, fullScreenButton.Height)}
+            };
+
+            startButtonPosition = new Dictionary<string, Tuple<int, int>>()
+            {
+                {"position",  Tuple.Create(newButton.Left, newButton.Top)},
+                {"size",  Tuple.Create(newButton.Width, newButton.Height)}
+            };
+
+            endButtonPosition = new Dictionary<string, Tuple<int, int>>()
+            {
+                {"position",  Tuple.Create(endButton.Left, endButton.Top)},
+                {"size",  Tuple.Create(endButton.Width, endButton.Height)}
+            };
+
+            quitButtonPosition = new Dictionary<string, Tuple<int, int>>()
+            {
+                {"position",  Tuple.Create(quitButton.Left, quitButton.Top)},
+                {"size",  Tuple.Create(quitButton.Width, quitButton.Height)}
+            };
+        }
+
+        public void initializeItemsPositions()
+        {
+            initializePictures();
+            initializeButtons();
+            initializeLabels();
+        }
+
+        public void updateItemsPositions()
+        {
+
+            
+            updatePicture(avatarPicture, avatarPosition);
+            updatePicture(salfetkiInfo, salfetkiInfoPosition);
+            updatePicture(secoudPlayerPicture, secondPlayerPicturePosition);
+            updateButton(changeUserButton, changeUserButtonPosition);
+            updateButton(fullScreenButton, fullScreenButtonPosition);
+            updateButton(endButton, endButtonPosition);
+            updateButton(newButton, startButtonPosition);
+            updateButton(quitButton, quitButtonPosition);
+            updateLabel(welcomeLabel, welcomeLabelPosition);
+            updateLabel(label1, startLabelPosition);
+            updateLabel(secondPlayerName, secondPlayerLabelPosition);
+            updateLabel(player1Name, firstPlayerLabelPosition);
+
+
+
+        }
+
+        public void updatePicture(PictureBox item, Dictionary<string, Tuple<int,int>> position)
+        {
+            item.Left = getRatioX(position["position"].Item1);
+            item.Top = getRatioY(position["position"].Item2);
+            item.Width = getRatioX(position["size"].Item1);
+            item.Height = getRatioY(position["size"].Item2);
+        }
+
+        public void updateButton(Button item, Dictionary<string, Tuple<int, int>> position)
+        {
+            item.Left = getRatioX(position["position"].Item1);
+            item.Top = getRatioY(position["position"].Item2);
+            item.Width = getRatioX(position["size"].Item1);
+            item.Height = getRatioY(position["size"].Item2);
+        }
+
+        public void updateLabel(Label item, Dictionary<string, Tuple<int, int>> position)
+        {
+            item.Left = getRatioX(position["position"].Item1);
+            item.Top = getRatioY(position["position"].Item2);
+            item.Width = getRatioX(position["size"].Item1);
+            item.Height = getRatioY(position["size"].Item2);
+        }
+
+        public void switchFullScreen(bool toFull)
+        {
+            this.fullScreenMode = toFull;
+            if(toFull)
+            {
+                this.BackgroundImageLayout = ImageLayout.Stretch;
+                FormBorderStyle = FormBorderStyle.None;
+                WindowState = FormWindowState.Maximized;
+                formWidth = this.Width;
+                formHeight = this.Height;
+                updateProportions();
+                updateItemsPositions();
+                fullScreenButton.Text = "Exit Full Screen";
+            } else
+            {
+                this.BackgroundImageLayout = ImageLayout.None;
+                FormBorderStyle = FormBorderStyle.FixedSingle;
+                WindowState = FormWindowState.Normal;
+                this.Width = this.BackgroundImage.Width;
+                this.Height = this.BackgroundImage.Height;
+                formWidth = this.Width;
+                formHeight = this.Height;
+                updateProportions();
+                updateItemsPositions();
+                fullScreenButton.Text = "Enter Full Screen";
+            }
+        }
+
+        public static int getRatioX(int pixels)
+        {
+            return (int)Math.Round(pixels * Form1.ratioX);
+        }
+
+        public static int getRatioY(int pixels)
+        {
+            return (int)Math.Round(pixels * Form1.ratioY);
+        }
+
+        public static void updateProportions()
+        {
+           
+                ratioX = (formWidth * 1.0) / (980 * 1.0);
+                ratioY = (1.0 * formHeight) / (700 * 1.0);
+            
         }
 
         public static UniqueIDGenerator loadUniqueID()
@@ -201,6 +406,7 @@ namespace FruityMatch
                     MessageBox.Show("Something went wrong with loading the users. Check the location of your .exe file");
                 }
             }
+            usersCount = users.Count();
         }
        
 
@@ -228,6 +434,7 @@ namespace FruityMatch
             ChoosePlayingStyle chooseForm = new ChoosePlayingStyle();
             if (chooseForm.ShowDialog() == DialogResult.OK)
             {
+               // MessageBox.Show(this.Width + " " + this.Height);
                 ChangeUser userForm = new ChangeUser(users, uniqueID, true);
                 if (userForm.ShowDialog() == DialogResult.OK)
                 {
@@ -245,6 +452,8 @@ namespace FruityMatch
                     if (result == DialogResult.OK)
                     {
                         game = new Game(from.player1Comb, from.player2Comb, player1Name.Text, secondPlayerName.Text);
+                        fullScreenButton.Visible = false;
+                        quitButton.Visible = false;
 
                         setStartGame();
                         try
@@ -284,6 +493,8 @@ namespace FruityMatch
             welcomeLabel.Visible = true;
             secondPlayerName.Visible = false;
             secoudPlayerPicture.Visible = false;
+            fullScreenButton.Visible = true;
+            quitButton.Visible = true;
          
         }
 
@@ -540,6 +751,7 @@ namespace FruityMatch
                 {
                     SerializeUser(u);
                 }
+                usersCount = users.Count();
 
             }
         }
@@ -599,6 +811,34 @@ namespace FruityMatch
         private void Form1_Load(object sender, EventArgs e)
         {
 
+            initializeItemsPositions();
+
+            switchFullScreen(true);
+
+            //formWidth = this.Width;
+            //formHeight = this.Height;
+            //updateProportions();
+        }
+
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void button1_Click_3(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button1_Click_4(object sender, EventArgs e)
+        {
+            //MessageBox.Show(this.BackgroundImage.Width + " " + this.BackgroundImage.Height);
+            switchFullScreen(!fullScreenMode);
+        }
+
+        private void quitButton_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

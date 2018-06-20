@@ -110,6 +110,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="RemovingUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RemovingUser.Designer.cs">
+      <DependentUpon>RemovingUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="RevealingCombinations.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -140,6 +146,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RemovingUser.resx">
+      <DependentUpon>RemovingUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RevealingCombinations.resx">
       <DependentUpon>RevealingCombinations.cs</DependentUpon>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,17 +23,35 @@ namespace FruityMatch
             this.users = users;
             if (users.Count > 0)
             {
-                foreach (User u in users)
-                {
-                    if (secondPlayer)
+                if (users.Count > 1) {
+                    foreach (User u in users)
                     {
-                        secondPlayer = false;
-                        continue;
+                        if (secondPlayer)
+                        {
+                            secondPlayer = false;
+
+                            continue;
+                        }
+                        listBox1.Items.Add(u);
                     }
-                    listBox1.Items.Add(u);
+                    listBox1.SelectedIndex = 0;
+                    setUser((User)(listBox1.SelectedItem));
                 }
-                listBox1.SelectedIndex = 0;
-                setUser((User)(listBox1.SelectedItem));
+                else
+                {
+                    if (!secondPlayer)
+                    {
+                        listBox1.Items.Add(users[0]);
+                        listBox1.SelectedIndex = 0;
+                    }
+                    else
+                    {
+                        done.Enabled = false;
+                        removeButton.Enabled = false;
+                        changeAvatarButton.Enabled = false;
+                        InfoLabel.Visible = true;
+                    }
+                }
             }
         }
 
@@ -70,7 +89,10 @@ namespace FruityMatch
         {
             if (name.Text != "")
             {
-                done.Enabled = true;
+                if (listBox1.Items.Count > 0)
+                {
+                    done.Enabled = true;
+                }
                 User user = (User)listBox1.SelectedItem;
                 if(user != null)
                 {
@@ -95,20 +117,91 @@ namespace FruityMatch
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            setUser((User)listBox1.SelectedItem);
+            if (listBox1.Items.Count > 0)
+            {
+                done.Enabled = true;
+                removeButton.Enabled = true;
+                changeAvatarButton.Enabled = true;
+                InfoLabel.Visible = false;
+                User u = (User)listBox1.SelectedItem;
+                if (u != null)
+                {
+                    setUser(u);
+                }
+            }
+            else
+            {
+                removeButton.Enabled = false;
+                InfoLabel.Visible = true ;
+                changeAvatarButton.Enabled = false;
+            }
+            
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        public void addNewUser()
         {
             AddNewUser addForm = new AddNewUser();
             DialogResult result = addForm.ShowDialog();
-            if(result == DialogResult.OK)
+            if (result == DialogResult.OK)
             {
                 User user = new User(addForm.name, ID.generateUniqueId());
                 Form1.serializeID(ID);
                 user.changeAvatar(addForm.image);
                 listBox1.Items.Add(user);
                 this.users.Add(user);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            addNewUser();
+        }
+
+        private void removeButton_Click(object sender, EventArgs e)
+        {
+            if (listBox1.Items.Count > 1)
+            {
+                RemovingUser rmv = new RemovingUser();
+                DialogResult result = rmv.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    int ind = listBox1.SelectedIndex;
+                    User user = ((User)listBox1.SelectedItem);
+
+
+                    if (user != null )
+                    {
+                        
+                            listBox1.Items.RemoveAt(ind);
+                            listBox1.SelectedIndex = 0;
+                            
+                            this.users.RemoveAt(ind);
+                            try
+                            {
+                                File.Delete(@".\Users\user" + user.uniqueID + ".fmu");
+                            }
+                            catch
+                            {
+                                MessageBox.Show("Operation Unsuccessful");
+                            }
+                        if (user.isDefault())
+                        {
+                            User user2 = (User)listBox1.SelectedItem;
+                            user2.makeDefaultUser();
+                        }
+                       
+                    }
+                    else
+                    {
+                        MessageBox.Show("Must select user to delete");
+                    }
+                }
+                
+            } else
+            {
+                    MessageBox.Show("There is only one user created. If you want to remove it, " +
+                    "add a second one and then try again.");
+                
             }
         }
     }

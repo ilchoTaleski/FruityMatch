@@ -38,6 +38,8 @@
             this.changeUserButton = new System.Windows.Forms.Button();
             this.secoudPlayerPicture = new System.Windows.Forms.PictureBox();
             this.secondPlayerName = new System.Windows.Forms.Label();
+            this.fullScreenButton = new System.Windows.Forms.Button();
+            this.quitButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.salfetkiInfo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.avatarPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.secoudPlayerPicture)).BeginInit();
@@ -118,7 +120,7 @@
             this.player1Name.AutoSize = true;
             this.player1Name.BackColor = System.Drawing.Color.Transparent;
             this.player1Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.player1Name.Location = new System.Drawing.Point(235, 153);
+            this.player1Name.Location = new System.Drawing.Point(244, 153);
             this.player1Name.Name = "player1Name";
             this.player1Name.Size = new System.Drawing.Size(60, 24);
             this.player1Name.TabIndex = 6;
@@ -127,7 +129,7 @@
             // 
             // changeUserButton
             // 
-            this.changeUserButton.Location = new System.Drawing.Point(239, 153);
+            this.changeUserButton.Location = new System.Drawing.Point(239, 156);
             this.changeUserButton.Name = "changeUserButton";
             this.changeUserButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.changeUserButton.Size = new System.Drawing.Size(90, 42);
@@ -152,17 +154,41 @@
             this.secondPlayerName.AutoSize = true;
             this.secondPlayerName.BackColor = System.Drawing.Color.Transparent;
             this.secondPlayerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.secondPlayerName.Location = new System.Drawing.Point(648, 153);
+            this.secondPlayerName.Location = new System.Drawing.Point(658, 153);
             this.secondPlayerName.Name = "secondPlayerName";
             this.secondPlayerName.Size = new System.Drawing.Size(60, 24);
             this.secondPlayerName.TabIndex = 9;
             this.secondPlayerName.Text = "label2";
             this.secondPlayerName.Visible = false;
             // 
+            // fullScreenButton
+            // 
+            this.fullScreenButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.fullScreenButton.Location = new System.Drawing.Point(59, 560);
+            this.fullScreenButton.Name = "fullScreenButton";
+            this.fullScreenButton.Size = new System.Drawing.Size(100, 42);
+            this.fullScreenButton.TabIndex = 10;
+            this.fullScreenButton.Text = "Exit Full Screen";
+            this.fullScreenButton.UseVisualStyleBackColor = true;
+            this.fullScreenButton.Click += new System.EventHandler(this.button1_Click_4);
+            // 
+            // quitButton
+            // 
+            this.quitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.quitButton.Location = new System.Drawing.Point(819, 550);
+            this.quitButton.Name = "quitButton";
+            this.quitButton.Size = new System.Drawing.Size(100, 42);
+            this.quitButton.TabIndex = 11;
+            this.quitButton.Text = "Quit Game";
+            this.quitButton.UseVisualStyleBackColor = true;
+            this.quitButton.Click += new System.EventHandler(this.quitButton_Click);
+            // 
             // Form1
             // 
             this.BackgroundImage = global::FruityMatch.Properties.Resources.image_play;
             this.ClientSize = new System.Drawing.Size(973, 698);
+            this.Controls.Add(this.quitButton);
+            this.Controls.Add(this.fullScreenButton);
             this.Controls.Add(this.secondPlayerName);
             this.Controls.Add(this.secoudPlayerPicture);
             this.Controls.Add(this.changeUserButton);
@@ -204,6 +230,8 @@
         private System.Windows.Forms.Button changeUserButton;
         private System.Windows.Forms.PictureBox secoudPlayerPicture;
         private System.Windows.Forms.Label secondPlayerName;
+        private System.Windows.Forms.Button fullScreenButton;
+        private System.Windows.Forms.Button quitButton;
     }
 }
 

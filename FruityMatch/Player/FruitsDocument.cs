@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace FruityMatch
 {
@@ -14,23 +15,24 @@ namespace FruityMatch
         {
             allFruits = new List<FruitCollection>();
             List<Rectangle> plates = new List<Rectangle>();
-            int x = 70;
-            int y = 70;
-            int width = 80;
-            int height = 80;
-            int diff = 160;
+            int x = Form1.getRatioX(70) ;
+            int y = Form1.getRatioY(70);
+            int width = Form1.getRatioX(80);
+            int height = Form1.getRatioY(80);
+            int diff = Form1.getRatioY(160);
+            //MessageBox.Show(Form1.ratioY.ToString() + " " + Form1.ratioX);
             for(int i=0; i<6; i++)
             {
                 if(i == 3)
                 {
-                    x = 820;
+                    x = Form1.getRatioX(820); ;
                 }
                 if(i % 3 == 2)
                 {
-                    diff = 150;
+                    diff = Form1.getRatioY(150); ;
                 } else
                 {
-                    diff = 160;
+                    diff = Form1.getRatioY(160); ;
                 }
                 Rectangle rec = new Rectangle(x, y + diff * (i % 3) + height * (i % 3), width, height);
                 plates.Add(rec);

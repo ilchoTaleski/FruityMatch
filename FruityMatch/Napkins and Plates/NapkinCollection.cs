@@ -21,22 +21,22 @@ namespace FruityMatch
         }
         public void InitializeNapkins()
         {
-            int x = 440;
-            int y = 215;
-            int difference = 47;
+            int x = Form1.getRatioX(440);
+            int y = Form1.getRatioY(215);
+            int difference = Form1.getRatioY(47);
             if (playerID == 0)
             {
-                x = 440;
+                x = Form1.getRatioX(440);
 
             }
             else
             {
-                x = 540;
+                x = Form1.getRatioX(540);
 
             }
             for (int i = 0; i<10; i++)
             {
-                Napkin napkin = new Napkin(i, "00", x, y + difference * (i % 10), 50, 50);
+                Napkin napkin = new Napkin(i, "00", x, y + difference * (i % 10), (int)Math.Round(50 * Form1.ratioX), (int)Math.Round(50 * Form1.ratioY));
                 napkins.Add(napkin);
             }
         }
