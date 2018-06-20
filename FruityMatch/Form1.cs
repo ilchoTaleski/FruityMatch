@@ -101,37 +101,7 @@ namespace FruityMatch
             }
             users = new List<User>();
 
-            if(!checkUsers())
-            {
-                AddNewUser userForm = new AddNewUser();
-                DialogResult result = userForm.ShowDialog();
-                if(result == DialogResult.OK)
-                {
-                    User user = new User(userForm.name, uniqueID.generateUniqueId());
-                    serializeID(uniqueID);
-                    currentUser = user;
-                    user.changeAvatar(userForm.image);
-                    user.makeDefaultUser();
-                    users.Add(user);
-                    SerializeUser(user);
-                    changeToNewUser(currentUser);
-
-                }
-            }
-            else
-            {
-                loadUsers();
-                foreach(User u in users)
-                {
-                    if (u.isDefault())
-                    {
-                        currentUser = u;
-                        changeToNewUser(currentUser);
-                        
-                    }
-                }
-                sortUsers();
-            }
+            
 
             switcher = true;
             hasTicked = false;
@@ -959,24 +929,64 @@ namespace FruityMatch
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to leave this game?", "Quit Game",
-                MessageBoxButtons.OKCancel);
-            if (result == DialogResult.OK)
+            if (users.Count > 0)
             {
-                foreach (User u in users) {
-                    SerializeUser(u);
-                }
+                DialogResult result = MessageBox.Show("Are you sure you want to leave this game?", "Quit Game",
+                    MessageBoxButtons.OKCancel);
+                if (result == DialogResult.OK)
+                {
+                    foreach (User u in users)
+                    {
+                        SerializeUser(u);
+                    }
 
-                e.Cancel = false;
-            }
-            else
-            {
-                e.Cancel = true;
+                    e.Cancel = false;
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
             }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
+            if (!checkUsers())
+            {
+                AddNewUser userForm = new AddNewUser();
+                DialogResult result = userForm.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    User user = new User(userForm.name, uniqueID.generateUniqueId());
+                    serializeID(uniqueID);
+                    currentUser = user;
+                    user.changeAvatar(userForm.image);
+                    user.makeDefaultUser();
+                    users.Add(user);
+                    SerializeUser(user);
+                    changeToNewUser(currentUser);
+
+                }
+                else
+                {
+                    Application.Exit();
+                }
+            }
+            else
+            {
+                loadUsers();
+                foreach (User u in users)
+                {
+                    if (u.isDefault())
+                    {
+                        currentUser = u;
+                        changeToNewUser(currentUser);
+
+                    }
+                }
+                sortUsers();
+            }
 
             initializeItemsPositions();
 
